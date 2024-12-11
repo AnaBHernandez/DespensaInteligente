@@ -1,0 +1,5 @@
+com\despensa\inteligente\controllers\ProductoController.class
+com\despensa\inteligente\services\ProductoService.class
+com\despensa\inteligente\DespensaInteligenteApplication.class
+com\despensa\inteligente\models\Producto.class
+com\despensa\inteligente\repositories\ProductoRepository.class
