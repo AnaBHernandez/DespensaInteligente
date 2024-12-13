@@ -1,4 +1,4 @@
-# Problemas y Soluciones
+GIT # Problemas y Soluciones
 
 ## Problema 1: Conexión a la base de datos MySQL
 ### Descripción:
