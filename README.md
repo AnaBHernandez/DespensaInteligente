@@ -16,8 +16,8 @@ Aunque es una implementación inicial, refleja el esfuerzo dedicado al aprendiza
 ## Requisitos
 - Implementación de un CRUD funcional (crear, leer, actualizar, eliminar) para la gestión de productos.
 - Conexión a una base de datos MySQL.
-- Cobertura de pruebas del 65%.
-- Manejo de errores básico utilizando ExceptionHandler.
+- Cobertura de pruebas del 75%.
+.
 
 ## Instrucciones de Configuración
 1. Clona el repositorio en tu máquina local:
