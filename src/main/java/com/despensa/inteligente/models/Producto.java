@@ -1,9 +1,25 @@
-public class Producto {
-    private Long id;
-    private String nombre;
-    private int cantidad;
-    private String fechaExpiracion;
+package com.despensa.inteligente.models;
 
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+@Entity
+public class Producto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nombre;
+    private String descripcion;
+    private BigDecimal precio;
+    private int cantidad;
+
+    @Temporal(TemporalType.DATE)
+    private Date fechaExpiracion;
+
+    // Getters y setters
     public Long getId() {
         return id;
     }
@@ -20,6 +36,22 @@ public class Producto {
         this.nombre = nombre;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public BigDecimal getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
+    }
+
     public int getCantidad() {
         return cantidad;
     }
@@ -28,11 +60,11 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    public String getFechaExpiracion() {
+    public Date getFechaExpiracion() {
         return fechaExpiracion;
     }
 
-    public void setFechaExpiracion(String fechaExpiracion) {
+    public void setFechaExpiracion(Date fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
 }

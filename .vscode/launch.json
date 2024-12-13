@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        
+        
+        {
+            "type": "java",
+            "name": "DespensaInteligenteApplication",
+            "request": "launch",
+            "mainClass": "com.despensa.inteligente.DespensaInteligenteApplication",
+            "projectName": "despensa-inteligente"
+        }
+    ]
+}

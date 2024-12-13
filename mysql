@@ -1,0 +1,55 @@
+-- Crear la base de datos
+CREATE DATABASE IF NOT EXISTS DESPENSA_INTELIGENTE;
+
+-- Usar la base de datos
+USE DESPENSA_INTELIGENTE;
+
+-- Crear una tabla de ejemplo
+CREATE TABLE IF NOT EXISTS productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    cantidad INT NOT NULL,
+    fecha_vencimiento DATE
+);
+
+-- Insertar datos de ejemplo
+INSERT INTO productos (nombre, cantidad, fecha_vencimiento) VALUES
+('Manzanas', 10, '2023-12-01'),
+('Leche', 5, '2023-11-15'),
+('Pan', 2, '2023-10-20');-- Crear la base de datos
+CREATE DATABASE IF NOT EXISTS DESPENSA_INTELIGENTE;
+
+-- Usar la base de datos
+USE DESPENSA_INTELIGENTE;
+
+-- Crear una tabla de ejemplo
+CREATE TABLE IF NOT EXISTS productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    cantidad INT NOT NULL,
+    fecha_vencimiento DATE
+);
+
+-- Insertar datos de ejemplo
+INSERT INTO productos (nombre, cantidad, fecha_vencimiento) VALUES
+('Manzanas', 10, '2023-12-01'),
+('Leche', 5, '2023-11-15'),
+('Pan', 2, '2023-10-20');-- Crear la base de datos
+CREATE DATABASE IF NOT EXISTS DESPENSA_INTELIGENTE;
+
+-- Usar la base de datos
+USE DESPENSA_INTELIGENTE;
+
+-- Crear una tabla de ejemplo
+CREATE TABLE IF NOT EXISTS productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    cantidad INT NOT NULL,
+    fecha_vencimiento DATE
+);
+
+-- Insertar datos de ejemplo
+INSERT INTO productos (nombre, cantidad, fecha_vencimiento) VALUES
+('Manzanas', 10, '2023-12-01'),
+('Leche', 5, '2023-11-15'),
+('Pan', 2, '2023-10-20');

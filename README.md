@@ -12,6 +12,25 @@ Aunque es una implementación inicial, refleja el esfuerzo dedicado al aprendiza
 - **CRUD Funcional**: Implementación completa para la gestión de productos.
 - **Conexión con MySQL**: Configuración del proyecto para utilizar una base de datos relacional.
 - **Pruebas Básicas**: Validación de las funcionalidades principales mediante pruebas automatizadas.
+=======
+## Requisitos
+- Implementación de un CRUD funcional (crear, leer, actualizar, eliminar) para la gestión de productos.
+- Conexión a una base de datos MySQL.
+- Cobertura de pruebas del 65%.
+- Manejo de errores básico utilizando ExceptionHandler.
+
+## Instrucciones de Configuración
+1. Clona el repositorio en tu máquina local:
+    ```sh
+    git clone https://github.com/AnaBHernandez/DespensaInteligente.git
+    ```
+2. Asegúrate de tener Java y Maven instalados.
+3. Configura la base de datos MySQL y actualiza el archivo `application.properties` con tus credenciales.
+4. Ejecuta la aplicación utilizando el comando:
+    ```sh
+    ./mvnw spring-boot:run
+    ```
+DI-1-feature/mysql-configuration
 
 ---
 
@@ -62,11 +81,3 @@ El siguiente diagrama UML representa la estructura de las entidades y sus relaci
 ---![UML](https://github.com/user-attachments/assets/24ffbdb0-9764-46e2-8ffb-cfd1a9fcfbd1)
 
 
-### **Notas para GitHub**
-
-- Usa etiquetas HTML `<img>` para redimensionar imágenes, ya que Markdown no permite ajustar el tamaño directamente.
-- Asegúrate de subir las imágenes (`Normalizacion.png` y `UML.png`) al mismo directorio que el archivo `README.md`.
-
----
-
-Este README incluye las imágenes redimensionadas usando HTML, y funcionará correctamente en GitHub. Si necesitas más ayuda, ¡avísame! 😊

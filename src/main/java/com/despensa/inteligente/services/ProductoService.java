@@ -1,12 +1,13 @@
 package com.despensa.inteligente.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.despensa.inteligente.models.Producto;
-import com.despensa.inteligente.repositories.ProductoRepository;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.despensa.inteligente.models.Producto;
+import com.despensa.inteligente.repository.ProductoRepository;
 
 @Service
 public class ProductoService {
@@ -14,24 +15,19 @@ public class ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
 
-    public List<Producto> obtenerTodosLosProductos() {
+    public List<Producto> getAllProductos() {
         return productoRepository.findAll();
     }
 
-    public Optional<Producto> obtenerProductoPorId(Long id) {
+    public Optional<Producto> getProductoById(Long id) {
         return productoRepository.findById(id);
     }
 
-    public Producto crearProducto(Producto producto) {
+    public Producto saveProducto(Producto producto) {
         return productoRepository.save(producto);
     }
 
-    public Producto actualizarProducto(Long id, Producto productoActualizado) {
-        productoActualizado.setId(id);
-        return productoRepository.save(productoActualizado);
-    }
-
-    public void eliminarProducto(Long id) {
+    public void deleteProducto(Long id) {
         productoRepository.deleteById(id);
     }
 }
