@@ -98,6 +98,13 @@ curl -X POST \
   -F "imagenFecha=@fecha_caducidad.jpg"
 ```
 
+## 🗺️ Hoja de Ruta y Gestión del Proyecto
+
+La evolución de **Despensa Inteligente** se gestiona de forma transparente en un tablero **Kanban**, demostrando la planificación a largo plazo y la priorización ágil.
+
+- **Ver el Roadmap:** [Tablero de Proyectos de Despensa Inteligente](https://github.com/users/AnaBHernandez/projects/5)
+- **Workflow:** Las tareas y errores (Issues) se mueven a través de las columnas (Backlog → Ready → In Progress) hasta ser resueltas.
+
 ## 📊 Estructura del Proyecto
 
 ```
