@@ -1,8 +1,15 @@
+
 package com.despensa.inteligente.models;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 public class Producto {
@@ -18,6 +25,10 @@ public class Producto {
 
     @Temporal(TemporalType.DATE)
     private Date fechaExpiracion;
+    
+    private String codigoBarras;
+    private String marca;
+    private String categoria;
 
     // Getters y setters
     public Long getId() {
@@ -66,5 +77,29 @@ public class Producto {
 
     public void setFechaExpiracion(Date fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
+    }
+
+    public String getCodigoBarras() {
+        return codigoBarras;
+    }
+
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

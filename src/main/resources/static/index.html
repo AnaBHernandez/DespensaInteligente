@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despensa Inteligente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .endpoint {
+            background: #ecf0f1;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        .method {
+            font-weight: bold;
+            color: #27ae60;
+        }
+        .url {
+            font-family: monospace;
+            background: #34495e;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        .description {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        .feature {
+            background: #e8f5e8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 4px solid #27ae60;
+        }
+        .status {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🆓 Despensa Inteligente - Versión Gratuita</h1>
+        
+        <div class="status">
+            ✅ <strong>Aplicación ejecutándose correctamente</strong><br>
+            🚀 Backend API disponible en localhost:8080
+        </div>
+
+        <div class="feature">
+            <h3>🎯 Funcionalidades Principales</h3>
+            <ul>
+                <li><strong>Escaneo de Códigos de Barras:</strong> Obtén información automática de productos</li>
+                <li><strong>OCR Gratuito:</strong> Extrae fechas de caducidad automáticamente</li>
+                <li><strong>Sistema de Alertas:</strong> Productos próximos a caducar</li>
+                <li><strong>Sugerencias de Recetas:</strong> Ideas para usar productos antes de que caduquen</li>
+            </ul>
+        </div>
+
+        <h3>📱 Endpoints de la API</h3>
+        
+        <div class="endpoint">
+            <div class="method">GET</div>
+            <div class="url">/productos</div>
+            <div class="description">Obtener todos los productos de la despensa</div>
+        </div>
+
+        <div class="endpoint">
+            <div class="method">POST</div>
+            <div class="url">/productos</div>
+            <div class="description">Crear un nuevo producto</div>
+        </div>
+
+        <div class="endpoint">
+            <div class="method">POST</div>
+            <div class="url">/productos/escanear-completo</div>
+            <div class="description">🎯 PRINCIPAL - Escaneo completo (código de barras + OCR)</div>
+        </div>
+
+        <div class="endpoint">
+            <div class="method">POST</div>
+            <div class="url">/productos/escanear</div>
+            <div class="description">Solo escaneo de código de barras</div>
+        </div>
+
+        <div class="endpoint">
+            <div class="method">POST</div>
+            <div class="url">/productos/ocr</div>
+            <div class="description">Solo procesamiento de imagen con OCR</div>
+        </div>
+
+        <div class="endpoint">
+            <div class="method">GET</div>
+            <div class="url">/productos/alertas</div>
+            <div class="description">Productos próximos a caducar (3 días)</div>
+        </div>
+
+        <div class="endpoint">
+            <div class="method">GET</div>
+            <div class="url">/productos/recetas</div>
+            <div class="description">Sugerencias de recetas</div>
+        </div>
+
+        <div class="feature">
+            <h3>🛠️ Tecnologías Utilizadas (Todas Gratuitas)</h3>
+            <ul>
+                <li><strong>Java 21</strong> - Lenguaje de programación</li>
+                <li><strong>Spring Boot 2.5.4</strong> - Framework principal</li>
+                <li><strong>MySQL</strong> - Base de datos relacional</li>
+                <li><strong>Tesseract OCR</strong> - Reconocimiento óptico de caracteres (gratuito)</li>
+                <li><strong>Open Food Facts API</strong> - Base de datos de productos (gratuita)</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <h3>🚀 Cómo Probar la API</h3>
+            <p><strong>Ejemplo con curl:</strong></p>
+            <div style="background: #2c3e50; color: white; padding: 15px; border-radius: 5px; font-family: monospace;">
+                # Escaneo completo (recomendado)<br>
+                curl -X POST http://localhost:8080/productos/escanear-completo \<br>
+                &nbsp;&nbsp;-F "codigoBarras=1234567890123" \<br>
+                &nbsp;&nbsp;-F "imagenFecha=@fecha_caducidad.jpg"<br><br>
+                
+                # Obtener todos los productos<br>
+                curl http://localhost:8080/productos<br><br>
+                
+                # Productos próximos a caducar<br>
+                curl http://localhost:8080/productos/alertas
+            </div>
+        </div>
+
+        <div class="status">
+            🎉 <strong>¡Tu aplicación está funcionando perfectamente!</strong><br>
+            💡 Puedes usar herramientas como Postman o curl para probar los endpoints
+        </div>
+    </div>
+</body>
+</html>
