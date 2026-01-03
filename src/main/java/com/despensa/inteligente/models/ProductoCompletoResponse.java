@@ -1,7 +1,5 @@
 package com.despensa.inteligente.models;
 
-import java.util.Date;
-
 public class ProductoCompletoResponse {
     private Producto producto;
     private OcrResponse ocrResponse;

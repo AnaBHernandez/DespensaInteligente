@@ -9,64 +9,68 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
 public class OcrService {
 
-    private static final String DATE_PATTERN = "\\b(\\d{1,2})[/-](\\d{1,2})[/-](\\d{2,4})\\b|\\b(\\d{2,4})[/-](\\d{1,2})[/-](\\d{1,2})\\b";
+    private static final String DATE_PATTERN = "\\b(\\d{1,4})[/-](\\d{1,2})[/-](\\d{1,4})\\b";
     private static final Pattern DATE_REGEX = Pattern.compile(DATE_PATTERN);
 
+    private static final DateTimeFormatter[] FORMATTERS = new DateTimeFormatter[] {
+            DateTimeFormatter.ofPattern("d/M/yyyy"),
+            DateTimeFormatter.ofPattern("d-M-yyyy"),
+            DateTimeFormatter.ofPattern("dd/MM/yyyy"),
+            DateTimeFormatter.ofPattern("dd-MM-yyyy"),
+            DateTimeFormatter.ofPattern("yyyy/M/d"),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"),
+            DateTimeFormatter.ofPattern("d/M/yy"),
+            DateTimeFormatter.ofPattern("ddMMyyyy")
+    };
+
     public OcrResponse extraerFechaDeImagen(byte[] imagenBytes) {
+        if (imagenBytes == null || imagenBytes.length == 0) {
+            return new OcrResponse("", null, false, "Imagen vacía", 0.0);
+        }
+
         try {
-            // Configurar Tesseract OCR
             Tesseract tesseract = new Tesseract();
-            
-            // Configurar idioma (español + inglés)
             tesseract.setLanguage("spa+eng");
-            
-            // Configurar modo de reconocimiento para texto
             tesseract.setPageSegMode(1);
             tesseract.setOcrEngineMode(1);
-            
-            // Convertir bytes a imagen
+
             BufferedImage imagen = ImageIO.read(new ByteArrayInputStream(imagenBytes));
-            
-            // Procesar imagen con Tesseract
+            if (imagen == null) {
+                return new OcrResponse("", null, false, "No se pudo leer la imagen", 0.0);
+            }
+
             String textoExtraido = tesseract.doOCR(imagen);
-            
-            // Buscar fecha en el texto
-            Date fechaExtraida = extraerFechaDelTexto(textoExtraido);
+            LocalDate fechaExtraida = extraerFechaDelTexto(textoExtraido);
             boolean fechaValida = fechaExtraida != null;
-            
-            String mensaje = fechaValida ? 
-                    "Fecha extraída exitosamente con Tesseract OCR" : 
-                    "No se pudo extraer una fecha válida del texto";
-            
-            return new OcrResponse(textoExtraido.trim(), fechaExtraida, fechaValida, mensaje, 0.7);
-            
+
+            String mensaje = fechaValida ? "Fecha extraída exitosamente con Tesseract OCR" : "No se pudo extraer una fecha válida del texto";
+
+            return new OcrResponse(textoExtraido == null ? "" : textoExtraido.trim(), fechaExtraida, fechaValida, mensaje, fechaValida ? 0.7 : 0.0);
+
         } catch (TesseractException e) {
-            return new OcrResponse("", null, false, 
-                    "Error de Tesseract OCR: " + e.getMessage(), 0.0);
+            return new OcrResponse("", null, false, "Error de Tesseract OCR: " + e.getMessage(), 0.0);
         } catch (IOException e) {
-            return new OcrResponse("", null, false, 
-                    "Error al procesar imagen: " + e.getMessage(), 0.0);
+            return new OcrResponse("", null, false, "Error al procesar imagen: " + e.getMessage(), 0.0);
         } catch (Exception e) {
-            return new OcrResponse("", null, false, 
-                    "Error inesperado: " + e.getMessage(), 0.0);
+            return new OcrResponse("", null, false, "Error inesperado: " + e.getMessage(), 0.0);
         }
     }
 
-    private Date extraerFechaDelTexto(String texto) {
+    private LocalDate extraerFechaDelTexto(String texto) {
+        if (texto == null || texto.isBlank()) return null;
         Matcher matcher = DATE_REGEX.matcher(texto);
-        
         while (matcher.find()) {
             String fechaStr = matcher.group();
-            Date fecha = parsearFecha(fechaStr);
+            LocalDate fecha = parsearFecha(fechaStr.replaceAll("\\s+", ""));
             if (fecha != null && esFechaValida(fecha)) {
                 return fecha;
             }
@@ -74,29 +78,19 @@ public class OcrService {
         return null;
     }
 
-    private Date parsearFecha(String fechaStr) {
-        String[] formatos = {
-            "dd/MM/yyyy", "dd-MM-yyyy", "dd/MM/yy", "dd-MM-yy",
-            "yyyy/MM/dd", "yyyy-MM-dd", "yy/MM/dd", "yy-MM-dd",
-            "dd/MM/yyyy", "dd-MM-yyyy"
-        };
-        
-        for (String formato : formatos) {
+    private LocalDate parsearFecha(String fechaStr) {
+        for (DateTimeFormatter fmt : FORMATTERS) {
             try {
-                SimpleDateFormat sdf = new SimpleDateFormat(formato);
-                sdf.setLenient(false);
-                return sdf.parse(fechaStr);
-            } catch (ParseException e) {
-                // Continuar con el siguiente formato
+                return LocalDate.parse(fechaStr, fmt);
+            } catch (DateTimeParseException ignored) {
             }
         }
         return null;
     }
 
-    private boolean esFechaValida(Date fecha) {
-        Date hoy = new Date();
-        Date fechaLimite = new Date(hoy.getTime() + (365L * 24 * 60 * 60 * 1000)); // 1 año en el futuro
-        
-        return fecha.after(hoy) && fecha.before(fechaLimite);
+    private boolean esFechaValida(LocalDate fecha) {
+        LocalDate hoy = LocalDate.now();
+        LocalDate limite = hoy.plusYears(2);
+        return (fecha.isAfter(hoy) || fecha.isEqual(hoy)) && (fecha.isBefore(limite) || fecha.isEqual(limite));
     }
 }

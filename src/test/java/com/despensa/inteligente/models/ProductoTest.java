@@ -1,28 +1,47 @@
 package com.despensa.inteligente.models;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 
-public class ProductoTest {
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+class ProductoTest {
 
     @Test
-    public void testProductoGettersAndSetters() {
+    void testProductoGettersAndSetters() {
         Producto producto = new Producto();
-        producto.setId(1L);
-        producto.setNombre("Producto 1");
-        producto.setDescripcion("Descripción del Producto 1");
-        producto.setPrecio(new BigDecimal("10.50"));
-        producto.setCantidad(100);
-        producto.setFechaExpiracion(new Date());
+        Long id = 1L;
+        String nombre = "Leche";
+        String descripcion = "Leche entera";
+        BigDecimal precio = new BigDecimal("1.50");
+        int cantidad = 2;
+        LocalDate fecha = LocalDate.of(2024, 12, 31);
+        String codigoBarras = "123456789";
+        String marca = "Lactosa";
+        String categoria = "Lácteos";
 
-        assertEquals(1L, producto.getId());
-        assertEquals("Producto 1", producto.getNombre());
-        assertEquals("Descripción del Producto 1", producto.getDescripcion());
-        assertEquals(new BigDecimal("10.50"), producto.getPrecio());
-        assertEquals(100, producto.getCantidad());
-        assertNotNull(producto.getFechaExpiracion());
+        producto.setId(id);
+        producto.setNombre(nombre);
+        producto.setDescripcion(descripcion);
+        producto.setPrecio(precio);
+        producto.setCantidad(cantidad);
+        producto.setFechaExpiracion(fecha);
+        producto.setCodigoBarras(codigoBarras);
+        producto.setMarca(marca);
+        producto.setCategoria(categoria);
+
+        assertNotNull(producto);
+        assertEquals(id, producto.getId());
+        assertEquals(nombre, producto.getNombre());
+        assertEquals(descripcion, producto.getDescripcion());
+        assertEquals(precio, producto.getPrecio());
+        assertEquals(cantidad, producto.getCantidad());
+        assertEquals(fecha, producto.getFechaExpiracion());
+        assertEquals(codigoBarras, producto.getCodigoBarras());
+        assertEquals(marca, producto.getMarca());
+        assertEquals(categoria, producto.getCategoria());
     }
 }

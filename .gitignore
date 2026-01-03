@@ -52,3 +52,6 @@ logs/
 # Spring Boot
 application-local.properties
 application-dev.properties
+
+# Database
+*.sqlite

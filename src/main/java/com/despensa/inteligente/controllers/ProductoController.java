@@ -72,15 +72,21 @@ public class ProductoController {
 
     // Actualizar un producto
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> updateProducto(@PathVariable Long id, @RequestBody Producto producto) {
-        Optional<Producto> productoExistente = productoService.getProductoById(id);
-        if (productoExistente.isPresent()) {
-            producto.setId(id);
-            Producto productoActualizado = productoService.saveProducto(producto);
-            return ResponseEntity.ok(productoActualizado);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Producto> updateProducto(@PathVariable Long id, @RequestBody Producto productoDetalles) {
+        return productoService.getProductoById(id)
+            .map(productoExistente -> {
+                productoExistente.setNombre(productoDetalles.getNombre());
+                productoExistente.setDescripcion(productoDetalles.getDescripcion());
+                productoExistente.setPrecio(productoDetalles.getPrecio());
+                productoExistente.setCantidad(productoDetalles.getCantidad());
+                productoExistente.setFechaExpiracion(productoDetalles.getFechaExpiracion());
+                productoExistente.setCodigoBarras(productoDetalles.getCodigoBarras());
+                productoExistente.setMarca(productoDetalles.getMarca());
+                productoExistente.setCategoria(productoDetalles.getCategoria());
+                Producto productoActualizado = productoService.saveProducto(productoExistente);
+                return ResponseEntity.ok(productoActualizado);
+            })
+            .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // Obtener productos próximos a caducar
@@ -121,16 +127,16 @@ public class ProductoController {
             // 1. Buscar información del producto por código de barras
             Producto producto = productoApiService.buscarProductoPorCodigoBarras(codigoBarras);
             boolean productoEncontrado = producto != null;
-            
+
             // 2. Extraer fecha de caducidad con OCR
             OcrResponse ocrResponse = null;
             boolean fechaExtraida = false;
             
             if (imagenFecha != null && !imagenFecha.isEmpty()) {
-                byte[] imagenBytes = imagenFecha.getBytes();
+                byte[] imagenBytes = imagenFecha.getBytes(); // Obtener los bytes de la imagen
                 ocrResponse = ocrService.extraerFechaDeImagen(imagenBytes);
                 fechaExtraida = ocrResponse.isFechaValida();
-                
+
                 // 3. Si se encontró el producto y se extrajo la fecha, combinarlos
                 if (producto != null && fechaExtraida) {
                     producto.setFechaExpiracion(ocrResponse.getFechaExtraida());
@@ -152,9 +158,9 @@ public class ProductoController {
             ProductoCompletoResponse respuesta = new ProductoCompletoResponse(
                 producto, ocrResponse, productoEncontrado, fechaExtraida, mensaje
             );
-            
+
             return ResponseEntity.ok(respuesta);
-            
+
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

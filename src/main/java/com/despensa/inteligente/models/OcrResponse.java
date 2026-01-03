@@ -1,10 +1,11 @@
 package com.despensa.inteligente.models;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Objects;
 
 public class OcrResponse {
     private String textoExtraido;
-    private Date fechaExtraida;
+    private LocalDate fechaExtraida;
     private boolean fechaValida;
     private String mensaje;
     private double confianza;
@@ -12,7 +13,7 @@ public class OcrResponse {
     // Constructores
     public OcrResponse() {}
 
-    public OcrResponse(String textoExtraido, Date fechaExtraida, boolean fechaValida, String mensaje, double confianza) {
+    public OcrResponse(String textoExtraido, LocalDate fechaExtraida, boolean fechaValida, String mensaje, double confianza) {
         this.textoExtraido = textoExtraido;
         this.fechaExtraida = fechaExtraida;
         this.fechaValida = fechaValida;
@@ -29,11 +30,11 @@ public class OcrResponse {
         this.textoExtraido = textoExtraido;
     }
 
-    public Date getFechaExtraida() {
+    public LocalDate getFechaExtraida() {
         return fechaExtraida;
     }
 
-    public void setFechaExtraida(Date fechaExtraida) {
+    public void setFechaExtraida(LocalDate fechaExtraida) {
         this.fechaExtraida = fechaExtraida;
     }
 
@@ -59,5 +60,22 @@ public class OcrResponse {
 
     public void setConfianza(double confianza) {
         this.confianza = confianza;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OcrResponse that = (OcrResponse) o;
+        return fechaValida == that.fechaValida &&
+               Double.compare(that.confianza, confianza) == 0 &&
+               Objects.equals(textoExtraido, that.textoExtraido) &&
+               Objects.equals(fechaExtraida, that.fechaExtraida) &&
+               Objects.equals(mensaje, that.mensaje);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(textoExtraido, fechaExtraida, fechaValida, mensaje, confianza);
     }
 }

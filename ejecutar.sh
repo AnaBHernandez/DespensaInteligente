@@ -1,6 +1,8 @@
 #!/bin/bash
 
 echo "🚀 Iniciando Despensa Inteligente..."
+echo "ℹ️ Nota: Este script está diseñado para sistemas Debian/Ubuntu y usará 'sudo' para instalar dependencias."
+
 echo "📋 Verificando dependencias..."
 
 # Verificar si Maven está instalado
@@ -18,13 +20,8 @@ if ! command -v java &> /dev/null; then
 fi
 
 echo "✅ Dependencias verificadas"
-echo "🔧 Compilando proyecto..."
-
-# Compilar el proyecto
-mvn clean compile
-
-echo "🚀 Ejecutando aplicación..."
-echo "📱 La aplicación estará disponible en: http://localhost:8080"
+echo "🚀 Compilando y ejecutando la aplicación..."
+echo "📱 La aplicación estará disponible en: http://localhost:8080 (puerto por defecto)"
 echo "📋 Endpoints disponibles:"
 echo "   - GET /productos - Obtener todos los productos"
 echo "   - POST /productos - Crear producto"
@@ -33,5 +30,5 @@ echo "   - GET /productos/alertas - Productos próximos a caducar"
 echo ""
 echo "🛑 Para detener la aplicación, presiona Ctrl+C"
 
-# Ejecutar la aplicación
-mvn spring-boot:run
+# Ejecutar la aplicación (limpia, compila y corre)
+mvn clean spring-boot:run -Dspring-boot.run.profiles=dev

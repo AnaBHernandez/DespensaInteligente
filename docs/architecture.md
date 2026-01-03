@@ -8,7 +8,7 @@ classDiagram
         -ProductoService productoService
         -OcrService ocrService
         -ProductoApiService productoApiService
-        +getAllProductos() List~Producto~
+        +getAllProductos(): List~Producto~
         +getProductoById(Long id) Producto
         +createProducto(Producto producto) Producto
         +updateProducto(Long id, Producto producto) Producto
@@ -22,7 +22,7 @@ classDiagram
 
     class ProductoService {
         -ProductoRepository productoRepository
-        +getAllProductos() List~Producto~
+        +getAllProductos(): List~Producto~
         +getProductoById(Long id) Producto
         +createProducto(Producto producto) Producto
         +updateProducto(Long id, Producto producto) Producto

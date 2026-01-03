@@ -53,8 +53,8 @@ mvn spring-boot:run
 ```
 
 ### Acceder
-- **API**: http://localhost:8081
-- **H2 Console**: http://localhost:8081/h2-console
+- **API**: http://localhost:8080
+- **H2 Console**: http://localhost:8080/h2-console
 
 ## 📱 Endpoints Principales
 
@@ -76,7 +76,7 @@ mvn spring-boot:run
 
 ### Crear producto
 ```bash
-curl -X POST http://localhost:8081/productos \
+curl -X POST http://localhost:8080/productos \
   -H "Content-Type: application/json" \
   -d '{
     "nombre": "Leche",
@@ -93,7 +93,7 @@ curl -X POST http://localhost:8081/productos \
 ### Escaneo completo
 ```bash
 curl -X POST \
-  http://localhost:8081/productos/escanear-completo \
+  http://localhost:8080/productos/escanear-completo \
   -F "codigoBarras=1234567890123" \
   -F "imagenFecha=@fecha_caducidad.jpg"
 ```
@@ -156,7 +156,7 @@ src/
 - [🚀 Guía de Instalación](docs/installation.md)
 - [📱 Referencia de API](docs/api-reference.md)
 - [🔧 Solución de Problemas](docs/troubleshooting.md)
-- [🏗️ Arquitectura del Sistema](docs/architecture.md)
+- [🏗️ Arquitectura del Sistema](docs/architecture.md) 
 
 ## 🤝 Contribuir
 

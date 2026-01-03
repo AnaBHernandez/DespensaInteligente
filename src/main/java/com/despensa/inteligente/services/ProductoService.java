@@ -1,6 +1,6 @@
 package com.despensa.inteligente.services;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +17,9 @@ public class ProductoService {
 
     @Autowired
     private ProductoRepository productoRepository;
+    
+    @Autowired
+    private ProductoApiService productoApiService; // Inyectar ProductoApiService
 
     public List<Producto> getAllProductos() {
         return productoRepository.findAll();
@@ -35,25 +38,20 @@ public class ProductoService {
     }
 
     public Producto buscarProductoPorCodigoBarras(String codigoBarras) {
-        // Por ahora retorna null, aquí integrarías la API externa
-        // TODO: Integrar con API de productos (Open Food Facts, UPC Database, etc.)
-        return null;
+        return productoApiService.buscarProductoPorCodigoBarras(codigoBarras);
     }
 
     public List<Producto> getProductosProximosACaducar() {
-        List<Producto> todosLosProductos = productoRepository.findAll();
-        Date fechaLimite = getFechaLimite(3); // 3 días antes
-        
-        return todosLosProductos.stream()
-                .filter(producto -> producto.getFechaExpiracion() != null)
-                .filter(producto -> producto.getFechaExpiracion().before(fechaLimite))
-                .collect(Collectors.toList());
+        LocalDate hoy = LocalDate.now();
+        LocalDate fechaLimite = hoy.plusDays(3); // Productos que caducan en los próximos 3 días
+
+        return productoRepository.findByFechaExpiracionBetween(hoy, fechaLimite);
     }
 
-    private Date getFechaLimite(int diasAntes) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, diasAntes);
-        return calendar.getTime();
+    // Método para obtener productos caducados (opcional, pero útil)
+    public List<Producto> getProductosCaducados() {
+        LocalDate hoy = LocalDate.now();
+        return productoRepository.findByFechaExpiracionBefore(hoy);
     }
 
     public List<String> getSugerenciasRecetas() {

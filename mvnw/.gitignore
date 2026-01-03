@@ -1,17 +1,17 @@
 # Maven
 /target
-!/src/main/resources/static
+# !/src/main/resources/static
 
 # IntelliJ IDEA
 .idea
 *.iml
 
 # Visual Studio Code
-.vscode
+# .vscode
 
 # Logs
 *.log
 
 # OS generated files
 .DS_Store
-Thumbs.db
+# Thumbs.db

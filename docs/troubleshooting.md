@@ -129,7 +129,7 @@ mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8081"
 # Instalar Tesseract en Ubuntu/Debian
 sudo apt update
 sudo apt install tesseract-ocr tesseract-ocr-spa
-
+# Instalar el idioma español para Tesseract
 # Verificar instalación
 tesseract --version
 

@@ -10,7 +10,7 @@ http://localhost:8080
 ### **CRUD de Productos**
 
 #### **GET /productos**
-Obtener todos los productos
+Obtiene todos los productos registrados en la despensa.
 ```bash
 curl http://localhost:8080/productos
 ```

@@ -2,14 +2,12 @@
 package com.despensa.inteligente.models;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 public class Producto {
@@ -23,8 +21,7 @@ public class Producto {
     private BigDecimal precio;
     private int cantidad;
 
-    @Temporal(TemporalType.DATE)
-    private Date fechaExpiracion;
+    private LocalDate fechaExpiracion;
     
     private String codigoBarras;
     private String marca;
@@ -71,11 +68,11 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    public Date getFechaExpiracion() {
+    public LocalDate getFechaExpiracion() {
         return fechaExpiracion;
     }
 
-    public void setFechaExpiracion(Date fechaExpiracion) {
+    public void setFechaExpiracion(LocalDate fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
 

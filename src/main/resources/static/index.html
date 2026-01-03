@@ -70,7 +70,7 @@
         
         <div class="status">
             ✅ <strong>Aplicación ejecutándose correctamente</strong><br>
-            🚀 Backend API disponible en localhost:8080
+            🚀 Backend API disponible en localhost:8081
         </div>
 
         <div class="feature">
@@ -131,8 +131,8 @@
             <h3>🛠️ Tecnologías Utilizadas (Todas Gratuitas)</h3>
             <ul>
                 <li><strong>Java 21</strong> - Lenguaje de programación</li>
-                <li><strong>Spring Boot 2.5.4</strong> - Framework principal</li>
-                <li><strong>MySQL</strong> - Base de datos relacional</li>
+                <li><strong>Spring Boot 3.2.5</strong> - Framework principal</li>
+                <li><strong>H2 (en memoria)</strong> - Base de datos para desarrollo y pruebas</li>
                 <li><strong>Tesseract OCR</strong> - Reconocimiento óptico de caracteres (gratuito)</li>
                 <li><strong>Open Food Facts API</strong> - Base de datos de productos (gratuita)</li>
             </ul>
@@ -143,15 +143,15 @@
             <p><strong>Ejemplo con curl:</strong></p>
             <div style="background: #2c3e50; color: white; padding: 15px; border-radius: 5px; font-family: monospace;">
                 # Escaneo completo (recomendado)<br>
-                curl -X POST http://localhost:8080/productos/escanear-completo \<br>
+                curl -X POST http://localhost:8081/productos/escanear-completo \<br>
                 &nbsp;&nbsp;-F "codigoBarras=1234567890123" \<br>
                 &nbsp;&nbsp;-F "imagenFecha=@fecha_caducidad.jpg"<br><br>
                 
                 # Obtener todos los productos<br>
-                curl http://localhost:8080/productos<br><br>
+                curl http://localhost:8081/productos<br><br>
                 
                 # Productos próximos a caducar<br>
-                curl http://localhost:8080/productos/alertas
+                curl http://localhost:8081/productos/alertas
             </div>
         </div>
 
